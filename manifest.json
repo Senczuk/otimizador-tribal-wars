@@ -1,0 +1,22 @@
+{
+  "name": "Otimizador Estratégico - Tribal Wars",
+  "short_name": "Otimizador TW",
+  "description": "Ferramenta para otimizar recrutamento de tropas com simulação de mercado 1:1.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#1e140c",
+  "theme_color": "#8b5a2b",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
