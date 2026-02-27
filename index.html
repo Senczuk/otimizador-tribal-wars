@@ -8,131 +8,115 @@
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#8b5a2b">
 
-<!-- Ícones PWA -->
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
 
 <style>
 
-/* RESET PROFISSIONAL */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin:0; padding:0; box-sizing:border-box; }
 
 body {
     font-family: 'Trebuchet MS', serif;
     background: linear-gradient(#3b2a1a, #1e140c);
-    color: #f5e6c8;
-    padding: 20px;
+    color:#f5e6c8;
+    padding:20px;
 }
 
-.container {
-    max-width: 600px;
-    margin: auto;
-}
+.container { max-width:600px; margin:auto; }
 
 .card {
-    background: #2e1f12;
-    padding: 25px;
-    border-radius: 14px;
-    border: 2px solid #6b4b2a;
-    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    background:#2e1f12;
+    padding:25px;
+    border-radius:14px;
+    border:2px solid #6b4b2a;
+    box-shadow:0 0 20px rgba(0,0,0,0.6);
 }
 
-h2 {
-    text-align: center;
-    color: #ffd700;
-    margin-bottom: 20px;
-}
+h2 { text-align:center; color:#ffd700; margin-bottom:20px; }
+h3 { margin-top:15px; margin-bottom:8px; color:#ffcc66; }
 
-h3 {
-    margin-top: 15px;
-    margin-bottom: 8px;
-    color: #ffcc66;
-}
-
-.input-group {
-    position: relative;
-    width: 100%;
-    margin-bottom: 10px;
-}
+.input-group { position:relative; margin-bottom:10px; }
 
 .input-group input {
-    width: 100%;
-    padding: 12px;
-    padding-right: 35px;
-    border-radius: 8px;
-    border: 1px solid #6b4b2a;
-    background: #1b120a;
-    color: #f5e6c8;
-    font-size: 15px;
+    width:100%;
+    padding:12px;
+    padding-right:35px;
+    border-radius:8px;
+    border:1px solid #6b4b2a;
+    background:#1b120a;
+    color:#f5e6c8;
+    font-size:15px;
 }
 
 .clear-btn {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #cc9999;
-    font-weight: bold;
-    font-size: 14px;
-    display: none;
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    color:#cc9999;
+    display:none;
 }
 
-.clear-btn:hover {
-    color: #ff4444;
-}
+.clear-btn:hover { color:#ff4444; }
 
+/* SELECT ESTILIZADO */
 select {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #6b4b2a;
-    background: #1b120a;
-    color: #f5e6c8;
-    font-size: 15px;
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #6b4b2a;
+    background:#1b120a;
+    color:#f5e6c8;
+    font-size:15px;
+    appearance:none;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+
+    background-image:
+      linear-gradient(45deg, transparent 50%, #ffd700 50%),
+      linear-gradient(135deg, #ffd700 50%, transparent 50%);
+    background-position:
+      calc(100% - 20px) calc(50% - 3px),
+      calc(100% - 15px) calc(50% - 3px);
+    background-size:5px 5px, 5px 5px;
+    background-repeat:no-repeat;
 }
 
 button {
-    width: 100%;
-    padding: 14px;
-    margin-top: 18px;
-    border-radius: 8px;
-    border: none;
-    background: #8b5a2b;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.2s;
+    width:100%;
+    padding:14px;
+    margin-top:18px;
+    border:none;
+    border-radius:8px;
+    background:#8b5a2b;
+    color:white;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.2s;
 }
 
-button:hover {
-    background: #a86d35;
-}
+button:hover { background:#a86d35; }
 
 .resultado {
-    margin-top: 20px;
-    background: #1b120a;
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px solid #6b4b2a;
-    font-size: 14px;
-    line-height: 1.6em;
+    margin-top:20px;
+    background:#1b120a;
+    padding:15px;
+    border-radius:8px;
+    border:1px solid #6b4b2a;
+    line-height:1.6em;
+    font-size:14px;
 }
 
+/* REMOVE SETAS INPUT NUMBER */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+    -webkit-appearance:none;
+    margin:0;
 }
 
-input[type=number] {
-    -moz-appearance: textfield;
-}
+input[type=number] { -moz-appearance:textfield; }
 
 </style>
 </head>
@@ -147,27 +131,27 @@ input[type=number] {
 <h3>Seus Recursos</h3>
 
 <div class="input-group">
-    <input type="number" id="madeira" placeholder="Madeira" oninput="toggleClear(this)">
-    <span class="clear-btn" onclick="limpar('madeira')">✖</span>
+<input type="number" id="madeira" placeholder="Madeira" oninput="toggleClear(this)">
+<span class="clear-btn" onclick="limpar('madeira')">✖</span>
 </div>
 
 <div class="input-group">
-    <input type="number" id="argila" placeholder="Argila" oninput="toggleClear(this)">
-    <span class="clear-btn" onclick="limpar('argila')">✖</span>
+<input type="number" id="argila" placeholder="Argila" oninput="toggleClear(this)">
+<span class="clear-btn" onclick="limpar('argila')">✖</span>
 </div>
 
 <div class="input-group">
-    <input type="number" id="ferro" placeholder="Ferro" oninput="toggleClear(this)">
-    <span class="clear-btn" onclick="limpar('ferro')">✖</span>
+<input type="number" id="ferro" placeholder="Ferro" oninput="toggleClear(this)">
+<span class="clear-btn" onclick="limpar('ferro')">✖</span>
 </div>
 
 <h3>Selecionar Tropa</h3>
 <select id="tropa">
-    <option value="lanceiro">Lanceiro</option>
-    <option value="espadachim">Espadachim</option>
-    <option value="barbaro">Bárbaro</option>
-    <option value="arqueiro">Arqueiro</option>
-    <option value="explorador">Explorador</option>
+<option value="lanceiro">Lanceiro</option>
+<option value="espadachim">Espadachim</option>
+<option value="barbaro">Bárbaro</option>
+<option value="arqueiro">Arqueiro</option>
+<option value="explorador">Explorador</option>
 </select>
 
 <button onclick="calcular()">⚔️ Otimizar Recrutamento</button>
@@ -221,17 +205,36 @@ let idealM = otimizado * c.madeira;
 let idealA = otimizado * c.argila;
 let idealF = otimizado * c.ferro;
 
-let ganho = otimizado - atual;
+let diffM = idealM - m;
+let diffA = idealA - a;
+let diffF = idealF - f;
 
-let frase = ganho > 0
-    ? `É necessário ajustar os recursos no mercado para alcançar eficiência máxima.`
-    : `Seus recursos já estão otimizados.`;
+let estrategia = "";
+
+if(otimizado > atual){
+
+    function analisar(nome, diff){
+        if(diff > 0){
+            return `Comprar ${diff} de ${nome}.<br>`;
+        } else if(diff < 0){
+            return `Vender ${Math.abs(diff)} de ${nome}.<br>`;
+        }
+        return "";
+    }
+
+    estrategia += analisar("Madeira", diffM);
+    estrategia += analisar("Argila", diffA);
+    estrategia += analisar("Ferro", diffF);
+
+} else {
+    estrategia = "Seus recursos já estão perfeitamente distribuídos.";
+}
 
 document.getElementById("resultado").innerHTML = `
 <strong>📊 Resultado:</strong><br>
 Sem mercado: ${atual} unidades<br>
 Com mercado 1:1: ${otimizado} unidades<br>
-Ganho ao otimizar: +${ganho}<br><br>
+Ganho ao otimizar: +${otimizado - atual}<br><br>
 
 <strong>📦 Distribuição Ideal:</strong><br>
 Madeira: ${idealM}<br>
@@ -239,15 +242,12 @@ Argila: ${idealA}<br>
 Ferro: ${idealF}<br><br>
 
 <strong>⚖ Estratégia:</strong><br>
-${frase}
+${estrategia}
 `;
 }
 
-// Registro do Service Worker
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js")
-    .then(() => console.log("Service Worker registrado"))
-    .catch(error => console.log("Erro no Service Worker:", error));
+  navigator.serviceWorker.register("sw.js");
 }
 
 </script>
