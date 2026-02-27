@@ -7,7 +7,11 @@
 
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#8b5a2b">
-    
+
+<!-- Ícones PWA -->
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+
 <style>
 
 /* RESET PROFISSIONAL */
@@ -49,7 +53,6 @@ h3 {
     color: #ffcc66;
 }
 
-/* INPUT GROUP */
 .input-group {
     position: relative;
     width: 100%;
@@ -121,7 +124,6 @@ button:hover {
     line-height: 1.6em;
 }
 
-/* REMOVE SETAS DO INPUT NUMBER */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -223,7 +225,7 @@ let ganho = otimizado - atual;
 
 let frase = ganho > 0
     ? `É necessário ajustar os recursos no mercado para alcançar eficiência máxima.`
-    : `Seus recursos já estão otimizados.`
+    : `Seus recursos já estão otimizados.`;
 
 document.getElementById("resultado").innerHTML = `
 <strong>📊 Resultado:</strong><br>
@@ -241,8 +243,14 @@ ${frase}
 `;
 }
 
+// Registro do Service Worker
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js")
+    .then(() => console.log("Service Worker registrado"))
+    .catch(error => console.log("Erro no Service Worker:", error));
+}
+
 </script>
 
 </body>
-
 </html>
