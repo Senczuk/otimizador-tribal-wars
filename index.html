@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Otimizador Estratégico</title>
+
+<style>
+
+/* RESET PROFISSIONAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Trebuchet MS', serif;
+    background: linear-gradient(#3b2a1a, #1e140c);
+    color: #f5e6c8;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+}
+
+.card {
+    background: #2e1f12;
+    padding: 25px;
+    border-radius: 14px;
+    border: 2px solid #6b4b2a;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+}
+
+h2 {
+    text-align: center;
+    color: #ffd700;
+    margin-bottom: 20px;
+}
+
+h3 {
+    margin-top: 15px;
+    margin-bottom: 8px;
+    color: #ffcc66;
+}
+
+/* INPUT GROUP */
+.input-group {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    padding-right: 35px;
+    border-radius: 8px;
+    border: 1px solid #6b4b2a;
+    background: #1b120a;
+    color: #f5e6c8;
+    font-size: 15px;
+}
+
+.clear-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #cc9999;
+    font-weight: bold;
+    font-size: 14px;
+    display: none;
+}
+
+.clear-btn:hover {
+    color: #ff4444;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #6b4b2a;
+    background: #1b120a;
+    color: #f5e6c8;
+    font-size: 15px;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 18px;
+    border-radius: 8px;
+    border: none;
+    background: #8b5a2b;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #a86d35;
+}
+
+.resultado {
+    margin-top: 20px;
+    background: #1b120a;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #6b4b2a;
+    font-size: 14px;
+    line-height: 1.6em;
+}
+
+/* REMOVE SETAS DO INPUT NUMBER */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<div class="card">
+
+<h2>🏰 Otimizador Estratégico</h2>
+
+<h3>Seus Recursos</h3>
+
+<div class="input-group">
+    <input type="number" id="madeira" placeholder="Madeira" oninput="toggleClear(this)">
+    <span class="clear-btn" onclick="limpar('madeira')">✖</span>
+</div>
+
+<div class="input-group">
+    <input type="number" id="argila" placeholder="Argila" oninput="toggleClear(this)">
+    <span class="clear-btn" onclick="limpar('argila')">✖</span>
+</div>
+
+<div class="input-group">
+    <input type="number" id="ferro" placeholder="Ferro" oninput="toggleClear(this)">
+    <span class="clear-btn" onclick="limpar('ferro')">✖</span>
+</div>
+
+<h3>Selecionar Tropa</h3>
+<select id="tropa">
+    <option value="lanceiro">Lanceiro</option>
+    <option value="espadachim">Espadachim</option>
+    <option value="barbaro">Bárbaro</option>
+    <option value="arqueiro">Arqueiro</option>
+    <option value="explorador">Explorador</option>
+</select>
+
+<button onclick="calcular()">⚔️ Otimizar Recrutamento</button>
+
+<div class="resultado" id="resultado"></div>
+
+</div>
+</div>
+
+<script>
+
+const tropas = {
+    lanceiro: { madeira:50, argila:30, ferro:10 },
+    espadachim: { madeira:30, argila:30, ferro:70 },
+    barbaro: { madeira:60, argila:30, ferro:40 },
+    arqueiro: { madeira:100, argila:30, ferro:60 },
+    explorador: { madeira:50, argila:50, ferro:20 }
+};
+
+function toggleClear(input){
+    const btn = input.parentElement.querySelector(".clear-btn");
+    btn.style.display = input.value ? "block" : "none";
+}
+
+function limpar(id){
+    const campo = document.getElementById(id);
+    campo.value = "";
+    campo.parentElement.querySelector(".clear-btn").style.display = "none";
+}
+
+function calcular(){
+
+let m = parseInt(document.getElementById("madeira").value)||0;
+let a = parseInt(document.getElementById("argila").value)||0;
+let f = parseInt(document.getElementById("ferro").value)||0;
+
+let tipo = document.getElementById("tropa").value;
+let c = tropas[tipo];
+
+let atual = Math.min(
+    Math.floor(m/c.madeira),
+    Math.floor(a/c.argila),
+    Math.floor(f/c.ferro)
+);
+
+let total = m + a + f;
+let custoTotal = c.madeira + c.argila + c.ferro;
+let otimizado = Math.floor(total / custoTotal);
+
+let idealM = otimizado * c.madeira;
+let idealA = otimizado * c.argila;
+let idealF = otimizado * c.ferro;
+
+let ganho = otimizado - atual;
+
+let frase = ganho > 0
+    ? `É necessário ajustar os recursos no mercado para alcançar eficiência máxima.`
+    : `Seus recursos já estão otimizados.`
+
+document.getElementById("resultado").innerHTML = `
+<strong>📊 Resultado:</strong><br>
+Sem mercado: ${atual} unidades<br>
+Com mercado 1:1: ${otimizado} unidades<br>
+Ganho ao otimizar: +${ganho}<br><br>
+
+<strong>📦 Distribuição Ideal:</strong><br>
+Madeira: ${idealM}<br>
+Argila: ${idealA}<br>
+Ferro: ${idealF}<br><br>
+
+<strong>⚖ Estratégia:</strong><br>
+${frase}
+`;
+}
+
+</script>
+
+</body>
+</html>
